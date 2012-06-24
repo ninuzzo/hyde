@@ -1,0 +1,133 @@
+/* This stylesheet tries to use CSS hierarchy to match elements to style.
+   The purpose is to be as much as possible selective but without
+   redundancies. */
+
+body {
+ font: 1.188em Georgia, "Times New Roman", Times, serif;
+ color: #fff;
+ background-color: #141e24;
+ width: 90%;
+ margin: 2em auto;
+}
+
+body > header > hgroup {
+ background-color: #000;
+ border-top-left-radius: .5em;
+}
+
+body > header > hgroup {
+ float: left;
+ padding: 0 1em;
+ margin-bottom: .5em; /* This is to space out the menu a bit. */
+ height: 150px; /* Shots are 150px high. */
+}
+
+body > header > hgroup > h1 > a:link {
+ border-bottom: none;
+}
+
+body > header > hgroup > h1 {
+ margin: 0;
+}
+
+body > header > hgroup > h2 {
+ font: small-caps 1.188em Georgia, "Times New Roman", Times, serif;
+ margin-top: 0;
+ color: #ebdd04;
+}
+
+body > header > a > img {
+ float: left;
+ border: none; /* or border: 0, but the former is clearer to me! */
+}
+
+body > header > nav {
+ clear: both;
+}
+
+body > header > nav > ul {
+ list-style-type: none;
+ padding: .375em 0;
+ margin-top: 0;
+}
+
+body > header > nav > ul > li {
+ display: inline;
+}
+
+body > header > nav > ul > li > a:link, body > header > nav > ul > li > a,
+ body > header > nav > ul > li > a:visited {
+ font-weight: bold;
+ color: #fff;
+ /* Carmine color, dried blood! http://en.wikipedia.org/wiki/Carmine_(color) */
+ background-color: #960018;
+ padding: .375em;
+ margin-right: .625em;
+ text-decoration: none;
+ border-bottom: none;
+}
+
+body > header > nav > ul > li > a, body > header > nav > ul > li > a:hover,
+body > header > nav > ul > li > a:active {
+ background-color: #cc141c; /* Fresh blood! */
+}
+
+body > header > hgroup > h1 > a > img {
+ border: none;
+}
+
+#cont a:link, #cont a:visited {
+ color: #949294;
+ text-decoration: none;
+ border-bottom: 1px solid #5c5e64;
+}
+
+#cont a:active {
+ color: #343b40;
+ border-bottom: none;
+}
+
+#cont header > p {
+ margin-top: 0;
+}
+
+#cont table tr > td, #cont table tr > th {
+ padding: 0.5em;
+}
+
+#cont table tr > th {
+ vertical-align: top;
+ white-space: nowrap;
+}
+
+#cont caption {
+ font-weight: bold;
+}
+
+#cont .h1 {
+ font-size: 1.5em;
+}
+
+#cont .h2 {
+ font-size: 1.125em;
+}
+
+#cont > section.news > article > header > h1 {
+ margin-bottom: 0;
+}
+ 
+#cont .h3 {
+ font-size: 1.063em;
+}
+
+#cont figure {
+ float: left;
+}
+
+footer {
+ clear: both;
+}
+
+pre {
+ font: 1em monospace;
+}
