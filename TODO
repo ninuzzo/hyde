@@ -1,0 +1,47 @@
+TO-DO list for Hyde
+
+In no particular order. Anyone who wants to help with development is welcome.
+
+Please also grep the source code for other important to-do's, e.g. using:
+
+$ vim $(grep -rlwi TODO *)
+
+
+* Binary build for Mac OS X.
+* Windows icon.
+* More graceful shutdown (especially on Windows).
+* HTML to Lisp converter.
+* Minimize (compress) CSS of inline style tags.
+* Reader macros to support for different kinds of Lisp parentheses, so that
+  the user can use multiple parens freely to help legibility just like in
+  mathematics: () {} [] <>
+  See: http://briancarper.net/blog/442/lisp-syntax-doesnt-suck
+  http://symbo1ics.com/blog/?p=275
+* Raw strings (where no parsing is done, like PHP nowdocs). See:
+  http://www.cliki.net/cl-heredoc
+  http://en.wikipedia.org/wiki/Here_document
+  http://mihai.bazon.net/blog/hashes-and-raw-strings-in-common-lisp 
+  http://www.php.net/manual/en/language.types.string.php#language.types.string.syntax.nowdoc
+* Feature to check links site-wide for all generated pages and print a report
+  of broken links.
+* More tutorial videos.
+* Provide a feature to upload/update all modified files (vias FTP, SSH, rsync
+  and similar, configurable by the user) and another one to generate a list of
+  files modified so far (from the last start of the server).
+* Feature to add a validate this page button that posts the page HTML code to
+  http://validator.w3.org/check (e.g. using JavaScript)
+* Consider using the 'online' proclamation for some functions in order to
+  optimize. See: http://clhs.lisp.se/Body/d_inline.htm
+* A library to access relational databases (e.g. MySQL), but not using SQL,
+  that is too complex and verbose for non-programmers, but rather QBE.
+  QBE skeleton tables could be represented programmatically using Lisp nested
+  lists. The aim is to make it easy to generate one or more static pages from
+  database data.
+  See: http://en.wikipedia.org/wiki/Query_by_Example
+  http://www.cs.sfu.ca/CourseCentral/354/zaiane/material/notes/Chapter5/node2.html
+* Well, this is another project. Develop an ECL plugin for Notepad++, alike to
+  Geany LispEdit. Provide a simple way for users to load and use the hyde
+  package so that they can send s-expr including calls to generate HTML code
+  to ECL for pre-testing.
+  See: http://stackoverflow.com/questions/376022/compile-lisp-scheme-in-notepad
+  https://github.com/tgutu/geanylispedit/blob/master/HOWTO%20-%20LispEdit.pdf?raw=true

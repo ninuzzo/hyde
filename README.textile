@@ -1,0 +1,7 @@
+h1. Hyde 
+
+By "Antonio Bonifati":http://ninuzzo.github.com/about.html
+
+Hyde is a monstrous static website generator.
+
+Please visit the "Hyde home page":http://ninuzzo.github.com/hyde for documentation, tutorials, screencasts and downloads.
