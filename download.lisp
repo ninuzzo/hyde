@@ -13,12 +13,12 @@
      (ul
       (li
        (a :title "32-bit executable for Windows"
-        :href "download/hyde-latest.win.zip"
+        :href "download/hyde-0.1-win.zip"
         "Click &amp; pray version for Wingdoze Virus")
        ". All inclusive.")
       (li
        (a :title "32-bit executable for Linux"
-        :href "download/hyde-latest.linux.zip"
+        :href "download/hyde-0.1-linux.tgz"
         "Type &amp; swear version for Leenux Pingu.")
        ". You also need to have "
        (a :href "http://ecls.sourceforge.net/"
@@ -28,7 +28,7 @@
      (h1 :class "h2" :title "For developers" "For brainsick overhumans")
      (ul
       (li
-       (a :title "Portable source code" :href "download/hyde-latest.src.tgz"
+       (a :title "Portable source code" :href "https://github.com/ninuzzo/hyde/tarball/v0.1"
         "The full spaghetti-code mess, version 0.1")
        ". Compiles and runs under ECL Common-Lisp only.")))))
 
