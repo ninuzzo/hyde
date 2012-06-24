@@ -16,6 +16,8 @@
  #P"/home/ant/sites/hyde/site/blog/index.lisp" NIL
  #P"/home/ant/sites/hyde/site/book.lisp"
  (#P"/home/ant/sites/hyde/site/util.lisp")
+ #P"/home/ant/sites/hyde/site/test.lisp"
+ (#P"/home/ant/sites/hyde/site/menu.lisp")
  #P"/home/ant/sites/hyde/site/home-page/about.lisp"
  (#P"/home/ant/sites/hyde/site/home-page/layout.lisp")
  #P"/home/ant/sites/hyde/site/documentation.lisp"

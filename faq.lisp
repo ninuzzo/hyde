@@ -57,7 +57,38 @@
       (section
        (h1 :class "h2" :id "menu"
         "How to generate a menu and select the current item?")
-       (p "Answer here..."))
+       (p "Here is a simple example miming the one found on the "
+        (a :href "http://www.w3.org/wiki/Creating_multiple_pages_with_navigation_menus#Site_navigation"
+         :target "_blank" "W3C Wiki.") ":")
+       (pre (code "(lvar
+ (menu '(|index| \"Home\" |about| \"About us\"
+         |clients| \"Our Clients\" |products| \"Our Products\"
+         |services| \"Our Services\" |contact| \"Contact Us\"))
+
+ (echo
+  (nav
+   (ul
+    (loop for (page desc) in (pair-elements menu) collect
+     (li
+      (if (eq %page% page)
+          (strong desc)
+          (a :href (cat page \".html\") desc))))))))"))
+       (p "If you put this code in an shared file, e.g. "
+        (code "menu.lisp") " then you can use it in any page like this:")
+       (pre (code "(tvar
+ (%page% '|clients|)
+
+ (echo
+  (html :lang \"en\"
+   (head
+    (title \"Menu demo\")
+    (meta :charset \"utf-8\"))
+   (body
+    (inc \"menu.lisp\")))))"))
+       (p "Also remember to add " (code "menu.lisp") " to a list inside "
+        (code "hyde-exclude-list.lisp")
+        ". If you create this file from scratch, it should simply be this:")
+       (code "(\"menu.lisp\")"))
       (section
        (h1 :class "h2" :id "comment" "How to comment out a piece of code?")
        (p "By default Hyde generates minified HTML (all code on one line!). It usually does not make sense to add comments to that mess. There is currently no provision for generating an HTML comment tag, the one delimited by "
