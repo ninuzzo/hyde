@@ -43,6 +43,7 @@
  #P"/home/ant/sites/hyde/site/example/site/work.lisp"
  (#P"/home/ant/sites/hyde/site/example/site/layout.lisp")
  #P"/home/ant/sites/hyde/site/hello.lisp" NIL
+ #P"/home/ant/sites/hyde/site/example/hyde-screencasts/1/homepage-1.lisp" NIL
  #P"/home/ant/sites/hyde/site/layout.lisp" NIL
  #P"/home/ant/sites/hyde/site/example/homepage/index.lisp"
  (#P"/home/ant/sites/hyde/site/example/homepage/layout.lisp")
