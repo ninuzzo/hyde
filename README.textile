@@ -8,6 +8,7 @@ Please visit the "Hyde home page":http://ninuzzo.github.com/hyde for documentati
 
 h1. Donate
 
-!http://api.flattr.com/button/flattr-badge-large.png(Flattr this git repo)!:https://flattr.com/submit/auto?user_id=antonio.bonifati&url=https://github.com/ninuzzo/hyde&title=Hyde, a monstrous static website generator&language=&tags=github&category=software
+!http://api.flattr.com/button/flattr-badge-large.png(Flattr this git repo)!:https://flattr.com/submit/auto?user_id=antonio.bonifati&url=https://github.com/ninuzzo/hyde&title=Hyde,%20a%20monstrous%20static%20website%20generator&language=&tags=github&category=software
 
-Donate and/or endorse Hyde with Pledgie: !http://www.pledgie.com/campaigns/17685.png?skin_name=chrome(Click here to lend your support to: Hyde, a monstrous static website generator, and make a donation at www.pledgie.com)!:http://www.pledgie.com/campaigns/17685.png?skin_name=chrome
+Donate and/or endorse Hyde with Pledgie:
+!http://www.pledgie.com/campaigns/17685.png?skin_name=chrome(Click here to lend your support to: Hyde, a monstrous static website generator, and make a donation at www.pledgie.com)!:http://www.pledgie.com/campaigns/17685
