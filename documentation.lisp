@@ -11,7 +11,7 @@
     (p "Hyde's learning curve is very gentle and the Lisp syntax easy and uniform: in a few minutes you will be able to translate HTML into Lisp code and finally modularize your HTML code, without complicating your testing and development process. You can view Lisp as a sort of tag-based language, indeed it is an s-expression based language and, as you will see, you use s-exprs instead of tags.")
     (p "By the way, Lisp stands for " (b "L") "ots of " (b "I") "nsignificant "
      (b "S") "illy " (b "P") "arentheses and HTML for " (b "H") "orrible "
-     (b "T") "ag-" (b "M") "any " (b "L") "anguage.")
+     (b "T") "ag-" (b "M") "ess " (b "L") "anguage.")
     (with-toc
      (section
       (h1 :id "editor" :class "h2" "Editor choice: any but not too spartan")
@@ -106,6 +106,31 @@
       (pre
        (code "(blockquote \"\\\"Wouldn't it be marvelous if the two natures in man
   could be separated — housed in different bodies!\\\"\")"))
+      (p (cont "If your strings contain any < or > signs, you have to replace them by their respective HTML entities. Alternatively, you can use the handy ")
+       (code "cont") " function, which stands for " (em "content")
+       " and is especially useful when there are a lot of angle bracket to escape:")
+      (pre
+       (code (cont "(pre (cont \"<!DOCTYPE html>
+<html>
+<body>
+
+<h1>My First Heading</h1>
+
+<p>My first paragraph.</p>
+
+</body>
+</html>\"))")))
+      (p "There is also an " (code "attr") " function to help to escape an attribute string. It replaces " (code "&amp;") " with "
+       (code "&amp;amp;") " and " (code "\"") " with " (code "&amp;quot;")
+       ". It should always be used unless you are sure the string does not contain any double quote character or the attribute is a
+URI or URL. E.g.")
+      (code "(img :src \"poster.jpg\" :alt (attr \"\\\"Dr. Jekyll & Mr. Hyde\\\"\"))")
+      (p "is the same as:")
+      (code "(img :src \"poster.jpg\" :alt \"&amp;quot;Dr. Jekyll &amp;amp; Mr. Hyde&amp;quot;\")")
+      (p "In both cases, the HTML code returned is:")
+      (code (cont "<img src=\"poster.jpg\" alt=\"&quot;Dr. Jekyll &amp; Mr. Hyde&quot;\"/>"))
+      (p "Usually, the former is probably more useful when a variable defines the attribute value and its content is a string that needs to be HTML-escaped:")
+      (pre (code "(lvar (title \"\\\"Dr. Jekyll & Mr. Hyde\\\"\") (img :src \"poster.jpg\" :alt (attr title)))"))
       (p "When attribute names and values need to be generated programmatically, e.g. as the result of a "
        (code "loop") " collecting elements or an "
        (code "if")

@@ -19,12 +19,14 @@
       :width 640 :height 502
       :codebase "http://active.macromedia.com/flash5/cabs/swflash.cab#version=7,0,0,0"
       (param :name "movie" :value "homepage-1.swf")
-      (param :name "play" :value "true")
+      ;; See: https://groups.google.com/forum/?fromgroups#!topic/wink-discuss/RhSnxTQvzyk
+      (param :name "play" :value "true") ; false has no effect here :-(
       (param :name "loop" :value "false")
       (param :name "wmode" :value "transparent")
       (param :name "quality" :value "low")
-      (embed :src "example/homepage-1.swf" :width 640 :height 502 :quality "low"
-       :loop "false" :wmode "transparent" :type "application/x-shockwave-flash"
+      (embed :src "example/homepage-1.swf" :width 640 :height 502
+       :quality "low" :loop "false" :wmode "transparent"
+       :type "application/x-shockwave-flash"
        :pluginspage "http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash"))
      (script "obj=document.getElementsByTagName('object');
       for (var i=0; i<obj.length; ++i)

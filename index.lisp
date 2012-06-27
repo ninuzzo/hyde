@@ -23,7 +23,9 @@
       (p "Tremble! Hyde's at large! "
        (a :href "download.html" "Download it") ", read the "
        (a :href "documentation.html" "docs")
-       " and try it out! Feature requests and bug reports are highly appreciated.")
+       " and try it out! "
+       (a :href "https://github.com/ninuzzo/hyde/issues" :target "_blank"
+        "Feature requests and bug reports") " are highly appreciated.")
       (p "To all naughty "
        (a :href "http://common-lisp.net/" :target "_blank" "(Un)common Lisp")
        " hackers and "

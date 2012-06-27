@@ -27,8 +27,7 @@
  (#P"/home/ant/sites/hyde/site/examples/home-page/layout.lisp")
  #P"/home/ant/sites/hyde/site/movies.lisp"
  (#P"/home/ant/sites/hyde/site/layout.lisp")
- #P"/home/ant/sites/hyde/site/prova.lisp"
- (#P"/home/ant/sites/hyde/site/uffa.lisp")
+ #P"/home/ant/sites/hyde/site/prova.lisp" NIL
  #P"/home/ant/sites/hyde/site/advantages.lisp"
  (#P"/home/ant/sites/hyde/site/layout.lisp")
  #P"/home/ant/sites/hyde/site/example/site/contact.lisp"

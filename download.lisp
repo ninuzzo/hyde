@@ -19,7 +19,7 @@
       (li
        (a :title "32-bit executable for Linux"
         :href "download/hyde-0.1-linux.tgz"
-        "Type &amp; swear version for Leenux Pingu.")
+        "Type &amp; swear version for Leenux Pingu")
        ". You also need to have "
        (a :href "http://ecls.sourceforge.net/"
         (abbr :title "Embeddable Common-Lisp" "ECL")) 
@@ -30,7 +30,9 @@
       (li
        (a :title "Portable source code" :href "https://github.com/ninuzzo/hyde/tarball/v0.1"
         "The full spaghetti-code mess, version 0.1")
-       ". Compiles and runs under ECL Common-Lisp only.")))))
+       ". Compiles and runs under ECL Common-Lisp only. You can also "
+       (a :href "https://github.com/ninuzzo/hyde" :target "_blank"
+        "browse the source-code repository online") ".")))))
 
  (echo 
   (inc "layout.lisp")))
