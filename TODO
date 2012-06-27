@@ -10,6 +10,8 @@ $ vim $(grep -rlwi TODO *)
 * Binary build for Mac OS X.
 * Windows icon.
 * More graceful shutdown (especially on Windows).
+* Windows version is too slow and there seem to be problems with that fucking
+  Internet Exploder.
 * HTML to Lisp converter.
 * Minimize (compress) CSS of inline style tags.
 * Reader macros to support for different kinds of Lisp parentheses, so that

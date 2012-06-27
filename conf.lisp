@@ -50,6 +50,7 @@ You should write a program to convert Apache mime.types file into a Lisp hash.
   ;; first line with ma and the current line is the last. You can also select
   ;; the list typing V on the first line, then /^) , return, k and type :sort i
   "css" (text css) 
+  "flv" (video x-flv)
   "gif" (image gif) 
   "htm" (text html)
   "html" (text html)
@@ -59,6 +60,7 @@ You should write a program to convert Apache mime.types file into a Lisp hash.
   "mp3" (audio mpeg)
   "ogg" (audio ogg)
   "png" (image png)
+  "swf" (application x-shockwave-flash)
   "txt" (text plain)
 )) "Web server mime-type map.")
 

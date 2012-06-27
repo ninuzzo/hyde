@@ -5,3 +5,9 @@ By "Antonio Bonifati":http://ninuzzo.github.com/about.html
 Hyde is a monstrous static website generator.
 
 Please visit the "Hyde home page":http://ninuzzo.github.com/hyde for documentation, tutorials, screencasts and downloads.
+
+h1. Donate
+
+[![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=antonio.bonifati&url=https://github.com/ninuzzo/hyde&title=Hyde, a monstrous static website generator&language=&tags=github&category=software)
+
+[![Donate and/or endorse Hyde with Pledgie](http://www.pledgie.com/campaigns/17685.png?skin_name=chrome)](Click here to lend your support to: Hyde, a monstrous static website generator, and make a donation at www.pledgie.com)
