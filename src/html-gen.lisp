@@ -268,6 +268,8 @@ dynamic variables.
 (defmacro tvar (binding-list &body forms)
   "Macro shortcut to define safe local dynamically scoped template variables,
 using a plain list syntax, avoiding the further nest level of a let*."
+  ;; This construct already ensuresthe binding-list is evaluated only once,
+  ;; no additional let is required in this case.
   `(let* ,(pair-elements binding-list) 
      #|
      Lisp local variables are lexical (static) by default.

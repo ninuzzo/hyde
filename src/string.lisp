@@ -77,4 +77,3 @@ and output everything to *standard-output*."
 ;; TODO: what about a normal function implementation vs a macro?
 ;; Maybe with the inline declaration? Which one is faster?
 ;(defun strcat (&rest args) (apply #'concatenate 'string args))
-

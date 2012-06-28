@@ -28,9 +28,10 @@ along with Hyde.  If not, see <http://www.gnu.org/licenses/>.
 ;;; TODO: the flexibility and all options of make-hash-table are lost.
 (defmacro list-to-hash (plain-list &key (test 'equal))
   "Macro to ease static hash initialization based on a plain list."
-  `(let ((hash (make-hash-table :test ',test)))
-     (loop for (key value) on ,plain-list by #'cddr
-       do (setf (gethash key hash) value)) hash))
+  (let ((hash (gensym))) ; This is to avoid potential symbol clashes.
+    `(let ((,hash (make-hash-table :test ',test)))
+       (loop for (key value) on ,plain-list by #'cddr
+         do (setf (gethash key ,hash) value)) ,hash)))
 
 ;;; This is useful for serialization. Unfortunately, hashes are not printable
 ;;; in Common Lisp. Common Lisp is not perfect, but there are some more
