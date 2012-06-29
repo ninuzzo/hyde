@@ -56,7 +56,8 @@
 <input type=\"submit\"/></form>")))
       (p "You also have the full Common Lisp standard at your disposal. That gives you access to a great deal of library functions, so by generating static HTML code with Lisp you will also learn a lot about programming in a very respectable language.")
       (p "You may ask, why so few people use Lisp if it's so good? I don't know... or better" (em "they")
-      " don't know. They don't know how easy and powerful Lisp is. Please, spread the voice!"))
+      " don't know. They don't know how easy and powerful Lisp is. Please, "
+      (a :href "contribute.html#ad" "spread the voice") "!"))
      (section
       (h1 :class "h2" :id "menu"
        "How to generate a menu and select the current item?")

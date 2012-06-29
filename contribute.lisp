@@ -5,8 +5,10 @@
   %content%
    (article
     (h1 :class "h1" "Donate or contribute")
+    (img :class "align-right" :src "img/lisplogo_warning2_256.png"
+     :alt "WARNING: BUILT USING LISP")
     (p "You can either "
-     (a :href "https://github.com/ninuzzo/hyde/blob/master/README.textile"
+     (a :href "https://github.com/ninuzzo/hyde/blob/master/README.textile#donate"
       :target "_blank" "donate money to this project")
      ", directly sponsor the implementation of new features you need or, if you are a good Common Lisp programmer, contribute to Hyde's development.")
     (p "Hyde is and will always remain "
@@ -21,7 +23,11 @@
      (p "If you wanna be a casual Hyde's developer or for your first contribution, fork the Hyde source code, implement something new or fix a bug and when you are done make a "
       (a :href "https://help.github.com/articles/using-pull-requests"
        :target "_blank" "pull request")
-      " for me to check and merge your changes. More stable and trusted collaborators will get full write privileges to the main repo, so they can commit their contributions directly there."))))
+      " for me to check and merge your changes. More stable and trusted collaborators will get full write privileges to the main repo, so they can commit their contributions directly there."))
+    (section :id "ad"
+     (h1 :class "h2" "Advertise the monster")
+     (script :src
+      "http://www.ohloh.net/p/603060/widgets/project_users_logo.js"))))
 
  (echo 
   (inc "layout.lisp")))

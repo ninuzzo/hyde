@@ -124,6 +124,12 @@ body > header > hgroup > h1 > a > img {
  float: left;
 }
 
+.align-right {
+ float: right;
+ margin-left: 1em;
+ margin-bottom: .563em;
+}
+ 
 footer {
  clear: both;
 }
