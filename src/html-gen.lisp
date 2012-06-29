@@ -55,18 +55,27 @@ content. Return this string. For empty attribute lists, a > sign is returned."
       Conversion to XHTML is easier too.
       |#
       (format nil " ~(~a~)=\"~a\"~a"
-              (car arg-list) (cadr arg-list) (attribs-content (cddr arg-list)))
+              ;; Note that, although ECL automatically applies tail-call
+              ;; optimization when compiling, despite this being not mandated
+              ;; by the CL standard, this kind of call cannot be
+              ;; tail-optimized.
+              (car arg-list) (cadr arg-list) (attribs-content (cddr
+                                                                arg-list)))
       ;; No more attributes, close open tag and print element content.
       (format nil ">~{~a~}" arg-list)))
 
 (defun attribs (arg-list)
   "Convert an attribute list into a proper HTML attribute string.
 Return this string, except that empty attribute lists are returned as nil."
- (if arg-list
-     ;; If arg-list length is not even (cadr is nil) the last attribute will
-     ;; be empty.
-     (format nil " ~(~a~)=\"~@[~a~]\"~@[~a~]"
-             (car arg-list) (cadr arg-list) (attribs (cddr arg-list)))))
+  (if arg-list
+      ;; If arg-list length is not even (cadr is nil) the last attribute will
+      ;; be empty.
+      (format nil " ~(~a~)=\"~@[~a~]\"~@[~a~]"
+              ;; Another recursive call which is not a tail-call and won't be
+              ;; optimized. Anyway, arg-lists are usually quite short and
+              ;; there shouldn't be a significant performance penalty or risk
+              ;; of stack overflow.
+              (car arg-list) (cadr arg-list) (attribs (cddr arg-list)))))
 
 (defun cont (&rest args)
   "Escape and catenate one or more content strings. It should always be used

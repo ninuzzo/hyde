@@ -74,6 +74,14 @@ and output everything to *standard-output*."
 (defmacro strcat (&rest strings)
   "A macro shortcut to concatenate strings."
   `(concatenate 'string ,@strings))
-;; TODO: what about a normal function implementation vs a macro?
-;; Maybe with the inline declaration? Which one is faster?
-;(defun strcat (&rest args) (apply #'concatenate 'string args))
+#|
+TODO: what about a normal function implementation vs a macro?
+Maybe with the inline declaration? Which one is faster?
+(defun strcat (&rest args) (apply #'concatenate 'string args))
+
+http://www.cs.cmu.edu/Groups/AI/html/cltl/clm/node143.html
+
+(defun strcat (&rest args)
+  (reduce #'(lambda (string-1 string-2)
+              (concatenate 'string string-1 string-2)) args :initial-value ""))
+|#
