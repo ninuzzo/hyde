@@ -378,19 +378,19 @@ URI or URL. E.g.")
        (pre (code "(defun shell (" (b "command-list") ")
    (pre
     " (b "(loop for (command response) in command-list collect
-     (cat") " (samp \"$ \") (code (kbd (cont command))) #\\linefeed
-      (samp response)" (b "))") "))"))
-       (p "Last, we replace " (code "(samp response)") " with "
-        (code (code "(if response (samp response))"))
+     (cat #\\linefeed") " (samp \"$ \") (code (kbd (cont command)))
+      #\\linefeed (samp response)" (b "))") "))"))
+       (p "Last, we replace " (code "#\\linefeed (samp response)") " with "
+        (code (code "(if response (cat #\\linefeed (samp response)))"))
         ". This is a refinement to avoid to print a harmless but empty "
         (code "samp")
         " tag for those commands that do not have a reply. Here is the final version of our function:")
        (pre (code ";;; Make it easy to typeset a shell session
-  (defun shell (command-list)
-   (pre
-    (loop for (command response) in command-list collect
-     (cat (samp \"$ \") (code (kbd (cont command))) #\\linefeed
-      " (b "(if response") " (samp response)" (b ")") "))))"))
+(defun shell (command-list)
+ (pre
+  (loop for (command response) in command-list collect
+   (cat #\\linefeed (samp \"$ \") (code (kbd (cont command)))
+    " (b "(if response (cat") " #\\linefeed (samp response)" (b "))") "))))"))
        (p "You can now typeset the previous shell session using this simple function call:")
        (pre (code (cont "(shell '((\"scores-gen >scores\") (\"sort -nur <scores\" \"10
   7
@@ -400,6 +400,22 @@ URI or URL. E.g.")
        (p "Here, I just wanted to show you that with Hyde you do not have to be a full-time programmer to be able to create simple functions to automate the most boring and repetitive HTML tasks. You can easily script HTML code with Lisp commands that look like the HTML data themselves."))
       (section
        (h1 :id "macros" :class "h3" "Functions that generate code and macros")
+       (p "As a first, simple example of macro, let's rewrite the "
+        (code "shell") " function of the "
+        (a :href "#user-fun" "previous section") " as a macro:")
+       (pre (code ";;; Make it easy to typeset a shell session (macro version)
+(defmacro shell (&amp;rest command-list)
+ (pre
+  (loop for (command response) in command-list collect
+   (cat #\\linefeed (samp \"$ \") (code (kbd (cont command)))
+    (if response (cat #\\linefeed (samp response)))))))"))
+       (p "Because macro arguments are not evaluated on call, " (code "shell")
+        " becomes a bit simpler to use: no quote characters are needed and the outer layer of parentheses is now unnecessary because "
+        (code "&amp;rest")
+        " already collects all remaining arguments into a list:")
+       (pre (code (cont "(shell (\"scores-gen >scores\") (\"sort -nur <scores\" \"10
+  7
+  6\")")))
        (p "Another common maintenance headache for all HTML designers is generating a table of contents (TOC) for the heading tags. This commonly needed feature is, increbibly, "
         (a :href "http://rebuildingtheweb.com/en/html5-shortcomings/" "not provided by HTML, not even HTML5!")
         " You need an external generator? Hyde is one. You need a better language than HTML? Lisp is one.")
@@ -440,21 +456,21 @@ URI or URL. E.g.")
        (ul
         (li (a :href \"#s2.1\" \"Section 2.1\"))))))
      (section
-      (h1 :class \"h2\" \"Section 1\")
+      (h1 :class \"h2\" :id \"s1\" \"Section 1\")
       \"...\"
       (section
        (hgroup
-        (h1 :class \"h3\" \"Section 1.1\")
+        (h1 :class \"h3\" :id \"s1.1\" \"Section 1.1\")
         (h2 :class \"tag\" \"Subtitle or tagline, not to be part of the TOC\"))
        \"...\")
       (section
-       (h1 :class \"h3\" \"Section 1.2\")
+       (h1 :class \"h3\" :id \"s1.2\" \"Section 1.2\")
        \"...\"))
      (section
-      (h1 :class \"h2\" \"Section 2\")
+      (h1 :class \"h2\" :id \"s2\" \"Section 2\")
       \"...\"
       (section
-       (h1 :class \"h3\" \"Section 2.1\")
+       (h1 :class \"h3\" :id \"s2.1\" \"Section 2.1\")
        \"...\")))))"))
        (p "Our aim is to automatically generate the " (code "nav")
         " tag and it's content. Note our TOC has to be put before the sections.")
@@ -557,10 +573,10 @@ URI or URL. E.g.")
        (p "This script is used in this same page to generate the TOC at the beginning and also in the "
         (a :href "faq.html" "FAQ page")
         ". So I can just add and remove sections from this manual or change their titles and I do not have to update the TOC manually. It is a macro that generates a TOC from some HTML code, by intercepting "
-        (code "h1") " calls, rather than by applying HTML transformations! It builds the TOC as data by adding one element at a time to the HTML tree structure and then " (code "eval") "s the code.")
+        (code "h1") " calls, rather than by applying HTML transformations! It builds the TOC as data by adding one element at a time to an HTML tree structure and then " (code "eval") "s this Lisp code to convert it to HTML.")
        (p "I have applied this algorithm to the HTML sectioned document above to test it. If you are not a Lisp programmer and you cannot understand it, you can still use it as a black box. The only thing you have to do is to wrap your code with a new special tag "
         (code "with-toc")
-        ", you do not have to change anything else and the TOC will be generated for you and printed ahead your code. This kind of magic is provided by Lisp macros. You couldn't use an equivalent XSLT solution so easily, directly from HTML.")
+        ", you do not have to change anything else and the TOC will be generated for you and printed ahead your code. This kind of magic is provided by Lisp macros and Lisp ability to interpret itself! You couldn't use an equivalent XSLT solution so easily, directly from HTML.")
        (p "Some facilities used in the code are directly provided by Hyde, like, for example, getting the content or the attribute value of an element. These are simple recurring sub-algorithms working on lists which have been solved once for all in the Hyde library source code and that you can reuse to implement your SAX-like algorithms. BTW, SAX is not a sort of trombone, it is a kind of HTML parser based on callbacks, that works in a conceptually analogous way to my implementation of our TOC-generator function.")))
      (section
       (h1 :id "the-end" :class "h2" "End of the story")
