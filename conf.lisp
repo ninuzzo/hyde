@@ -40,29 +40,11 @@ implementation.
   "Default site directory and server document root.")
 
 #|
-Key searches are case insensitive. There is no :initial-content option for
-make-hash-table in the Common Lisp standard this should be fixed with a macro.
-TODO: make sure all commonly used file types are covered here.
-You should write a program to convert Apache mime.types file into a Lisp hash.
+The mime-type map can not be configured here any more, any change must be made
+to src/mime-type.lisp and thus requires a program re-build. But since the
+mime-type table is rather complete, there should be very little need for
+changes.
 |#
-(defconstant +mime-type-map+ #.(list-to-hash '(
-  ;; To sort this list in VIM use :'a,.sort i assuming you have marked the
-  ;; first line with ma and the current line is the last. You can also select
-  ;; the list typing V on the first line, then /^) , return, k and type :sort i
-  "css" (text css) 
-  "flv" (video x-flv)
-  "gif" (image gif) 
-  "htm" (text html)
-  "html" (text html)
-  "ico" (image x-icon)
-  "jpg" (image jpeg)
-  "js" (application javascript)
-  "mp3" (audio mpeg)
-  "ogg" (audio ogg)
-  "png" (image png)
-  "swf" (application x-shockwave-flash)
-  "txt" (text plain)
-)) "Web server mime-type map.")
 
 (defvar *lisp-dep-file* "hyde-dependencies"
   "Default path and file name for the auto-generated Lisp makefile, relative

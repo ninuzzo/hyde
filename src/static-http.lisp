@@ -50,10 +50,24 @@ http://sourceforge.net/tracker/?func=detail&aid=3534516&group_id=30035&atid=3980
 (defconstant +server-version+
              #.(slot-value (asdf:find-system 'hyde) 'asdf:version))
 
+(defun http-char (c1 c2 &optional (default #\Space))
+  (let ((code (parse-integer (coerce (list c1 c2) 'string)
+                :radix 16 :junk-allowed t)))
+    (if code (code-char code) default)))
+
+;;; TODO: slow! It uses non-tail recursion...
+(defun decode-url (str)
+  (labels ((f (lst)
+             (when lst
+               (if (eql (car lst) #\%)
+                   (cons (http-char (cadr lst) (caddr lst)) (f (cdddr lst)))
+                   (cons (car lst) (f (cdr lst)))))))
+    (coerce (f (coerce str 'list)) 'string)))
+
 #|
 Process the first line of the request:
 GET /dir/file.html HTTP/1.1
-and return the request method (GET, POST or HEAD) and the URL path. For
+and return the request method (GET, POST or HEAD) and the decoded URL path. For
 simplicity, skip over protocol version and request parameters for both GET and
 POST. Query strings can be ignored since this is a simple server for static
 pages only.
@@ -66,8 +80,9 @@ pages only.
       (intern (string-upcase (subseq line 0 first-space)))
       ;; Resource path. +2 is to skip both the space and the /
       ;; TODO: better error recovery for illegal request syntax.
-      (subseq line (+ 2 first-space)
-        (if first-mark first-mark (position #\space line :from-end t))))))
+      (decode-url (subseq line (+ 2 first-space)
+                          (if first-mark first-mark
+                              (position #\space line :from-end t)))))))
 
 (defun skip-headers (stream)
   ;; (string= header "") won't work here, since we do not know the kind of

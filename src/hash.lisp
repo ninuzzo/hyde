@@ -53,5 +53,7 @@ along with Hyde.  If not, see <http://www.gnu.org/licenses/>.
     ;; it is easier to read.
     (pprint (hash-to-list hash) file)))
 
-;;; TODO: is there a better way to load this file? I mean not here.
-(load "conf.lisp")
+;;; This should be loaded here because otherwise hash-to-list won't be
+;;; available at reading time.
+(load (make-pathname :directory '(:RELATIVE "src")
+                     :name "mime-type" :type "lisp"))

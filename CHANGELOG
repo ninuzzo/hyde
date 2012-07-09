@@ -1,0 +1,7 @@
+Hyde 0.1.1 (upgrade from 0.1 recommended and safe for all users)
+* Added forgotten u tag.
+* Implemented forgotten url-decode (should I be shot?).
+* Imported all Apache mime.types.
+
+Hyde 0.1
+* First version, released on an unsuspecting world.

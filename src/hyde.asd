@@ -25,7 +25,7 @@ along with Hyde.  If not, see <http#://www.gnu.org/licenses/>.
      
 (defsystem hyde
   :author "Antonio Bonifati <antonio.bonifati@gmail.com>"
-  :version "0.1"
+  :version "0.1.1"
   :maintainer "Antonio Bonifati <antonio.bonifati@gmail.com>"
   :license "GPLv3"
   :description "An evil static website generator."

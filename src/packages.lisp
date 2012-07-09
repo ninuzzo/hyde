@@ -62,6 +62,10 @@ along with Hyde.  If not, see <http#://www.gnu.org/licenses/>.
   #:samp #:script #:section #:select #:small #:source #:span #:strong #:style
   #:sub #:summary #:sup #:table #:tbody #:td #:textarea #:tfoot #:th #:thead
   #:datetime ; time conflicts with a Lisp standard function.
-  #:title #:tr #:track #:ul
+  #:title #:tr #:track #:u #:ul
   #:var ; var conflicts in SBCL, not in ECL or CLISP.
   #:video #:wbr))
+
+;;; Load configuration at runtime.
+;;; TODO: is there a better plate to load this file other than here?
+(load "conf.lisp")

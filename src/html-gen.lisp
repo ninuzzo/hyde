@@ -414,6 +414,7 @@ http://developers.whatwg.org/section-index.html
 (def-elem title :desc "Define a title for the document.")
 (def-elem tr :desc "Define a row in a table.")
 (def-elem track :desc "Define text tracks for media elements (<video> and <audio>)." :void t)
+(def-elem u :desc "Define underlined text.")
 (def-elem ul :desc "Define an unordered list.")
 (def-elem var :desc "Define a variable. Actually named var in HTML.")
 (def-elem video :desc "Define a video or movie.")
