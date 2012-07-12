@@ -68,4 +68,4 @@ along with Hyde.  If not, see <http#://www.gnu.org/licenses/>.
 
 ;;; Load configuration at runtime.
 ;;; TODO: is there a better plate to load this file other than here?
-(load "conf.lisp")
+(load (make-pathname :name "conf" :type "lisp"))

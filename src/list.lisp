@@ -42,7 +42,7 @@ TODO: is the one above the fastest implementation?
 Alternate implementations (with no symbol support):
 
 (defun flatten (list)
-  (loop for i in list if (listp i) append (flatten i) else collect i) 
+  (loop for i in list if (listp i) append (flatten i) else collect i))
 
 (defun flatten (list)
   (cond

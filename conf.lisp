@@ -41,7 +41,7 @@ implementation.
 
 #|
 The mime-type map can not be configured here any more, any change must be made
-to src/mime-type.lisp and thus requires a program re-build. But since the
+to src/hash.lisp and thus requires a program re-build. But since the
 mime-type table is rather complete, there should be very little need for
 changes.
 |#
