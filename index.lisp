@@ -11,7 +11,10 @@
      (a :href "movies.html"
       "five minutes to learn to use all its basic features")
      ". Hyde makes your HTML5 more readable, checks for basic syntax errors, adds modularity, promotes code reuse and makes it easy and convenient to generate minified HTML, JavaScript and CSS code.")
-     (p "Hyde makes your site in situ and gives die-hard Lisp programmers full control and flexibility over the whole HTML generation process by providing tools rather than by enforcing policies. However, it is still easy to use for any casual webmaster, blogger or amateur with no real programming experience."))
+     (p "Hyde makes your site in situ and gives die-hard Lisp programmers full control and flexibility over the whole HTML generation process by providing tools rather than by enforcing policies. However, it is still easy to use for any casual webmaster, blogger or amateur with no real programming experience.")
+     (p "If you like Hyde and want to learn Common Lisp to do a bit more with it, this is "
+      (a :href "http://lisp.plasticki.com/" :target "_blank"
+       "the best beginners tutorial I know of") "."))
     (section :class "news"
      (h1 :class "h1" :title "Latest news" "Latest crime news")
      (article
