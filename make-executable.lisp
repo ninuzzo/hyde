@@ -2,6 +2,9 @@
 ;;; http://ecls.sourceforge.net/new-manual/ch16s03.html
 ;;; https://github.com/ayrnieu/ecl-examples
 
+;; Require the C compiler first, because in Windows
+;; ECL is activating the bytecodes compiler by default.
+(require :cmp) ; or (ext:install-c-compiler)
 (require :asdf)
 (push (make-pathname :directory '(:RELATIVE "src"))
       asdf:*central-registry*)
