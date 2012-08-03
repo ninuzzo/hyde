@@ -7,8 +7,6 @@
       asdf:*central-registry*)
 (push (make-pathname :directory '(:RELATIVE "src" "cl-ppcre-2.0.3"))
       asdf:*central-registry*)
-(push (make-pathname :directory '(:RELATIVE "src" "usocket-0.5.5"))
-      asdf:*central-registry*)
 ;;; See hyde-sources/hyde.asd, this flag is used to bootstrap the server.
 (pushnew :eclbuild *features*)
 (format t "~%~a~%"

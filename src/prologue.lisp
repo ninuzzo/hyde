@@ -1,4 +1,4 @@
-;;; See comment in ../server.sh for this.
+;;; See comment in ../make-executable.lisp for this.
 (defpackage #:cl-user (:use #:cl #:hyde))
 (in-package :cl-user)
 

@@ -156,6 +156,17 @@ human-readable error message."
      ;; recover so we let the program crash, while warning(s) are ignored.
      (simple-condition (condition) ,@forms)
      (error (condition) ,@forms)))
+
+(defun nslookup (name)
+  "Performs a DNS look up for hostname and returns the address as a four
+element array, suitable for socket-connect. If hostname is not found,
+a host-not-found-error condition is thrown."
+  ;; See: http://paste.lisp.org/display/40916
+  (cond
+    ((eql name :any) #(0 0 0 0))
+    ((typep name '(vector * 4)) name)
+    (t (car (host-ent-addresses (get-host-by-name name))))))
+
 #|
 Generic static server function. See:
 http://lisp.livejournal.com/38356.html
@@ -163,7 +174,6 @@ TODO: add multi-threading using mp (multi-processing). Make sure to make
 the hyde-request-handler is thread-safe, especially access to
 +lisp-dependencies+.
 See http://ecls.sourceforge.net/new-manual/ch19.html
-Usocket supports multi-threading through socket-server.
 Threads are enabled by default in Debian, Ubuntu and Arch Linux ECL packages.
 |#
 (defun serve (request-handler)
@@ -171,88 +181,106 @@ Threads are enabled by default in Debian, Ubuntu and Arch Linux ECL packages.
   #|
   Port 8080 is usually used for sites under development,
   while 80 for production web servers.
-  For simplicity we use usocket instead of BSD sockets provided by ECL.
-  See: http://paste.lisp.org/display/40916
+  To keep the number of dependencies low, we use BSD sockets which are bundled-in with ECL, instead of usocket. This cose is not portable to other
+  CL implementations for a lot of other reasons. See:
   http://www.sbcl.org/manual/Networking.html
-  TODO: what about using ECL threads directly, without usocket?
-  Is that any faster or better?
+  
+  TODO: what about using the ECL sockets library. What's the difference with sb-bsd-sockets? Is that any faster or better?
   |#
-  (let ((sock (socket-listen *server-address* *server-port*
-                             :backlog *server-backlog* :reuseaddress t)))
-    ;; Care should be taken to trap all possible exceptions here, and to avoid
-    ;; dropping into the Lisp debugger, which may puzzle users.
-    (unwind-protect
-     (loop (let* ((connected-sock (socket-accept sock))
-                  (stream (socket-stream connected-sock)))
-       (unwind-protect
-         (handle-all
-           (multiple-value-bind (method path)
-             #|
-             Error conditions may happen here. E.g. a client may close the
-             socket without sending anything o sending a partial request
-             (without an ending newline). In this case, when we try to read
-             the request line, an END-OF-FILE condition will be signalled. If
-             we do not handle it, the server will crash.
-             BTW if I use (read-line stream nil) I get:
+  ;; Care should be taken to trap all possible exceptions here, and to avoid
+  ;; dropping into the Lisp debugger, which may puzzle users.
+  (handle-all
+    (let ((sock (make-instance 'inet-socket :type :stream :protocol :tcp)))
+      (unwind-protect
+        (setf (sockopt-reuse-address sock) t)
+        (socket-bind sock (nslookup *server-address*) *server-port*)
+        (socket-listen sock *server-backlog*)
+        (loop (let* ((connected-sock (socket-accept sock))
+                     (stream (socket-make-stream connected-sock :input t
+                               ;; TODO: try :element-type :default
+                               :output t :element-type 'character)))
+          (unwind-protect
+            (handle-all
+              (multiple-value-bind (method path)
+                #|
+                Error conditions may happen here. E.g. a client may close the
+                socket without sending anything o sending a partial request
+                (without an ending newline). In this case, when we try to read
+                the request line, an END-OF-FILE condition will be signalled. If
+                we do not handle it, the server will crash.
+                BTW if I use (read-line stream nil) I get:
 
-             Condition of type: UNIX-SIGNAL-RECEIVED
-             Serious signal 13 caught.
-             Signal 13 is SIGPIPE - see signal (7)
+                Condition of type: UNIX-SIGNAL-RECEIVED
+                Serious signal 13 caught.
+                Signal 13 is SIGPIPE - see signal (7)
 
-             It seems to me better to handle a standard Lisp END-OF-FILE
-             condition, so I won't use nil with this read-line.
-             |#
-             (parse-request (read-line stream)) 
+                It seems to me better to handle a standard Lisp END-OF-FILE
+                condition, so I won't use nil with this read-line.
+                |#
+                (parse-request (read-line stream)) 
 
-             #|
-             Redefine the stdout dynamic variable so that the request-handler
-             can just write to stdout, making its debugging easier and generally
-             minimizing string concatenation needs. If you add other
-             initializations that may have the side effect of printing to
-             stdout, remember that this redirection should come last!
-             |#
-             (let* ((*standard-output* stream))
-               ;; We just ignore the request headers and the request body
-               ;; for now.
-               (skip-headers stream)
-               ;; TODO: if the client has closed the connection, do not call
-               ;; the request-handler, it is useless.
+                #|
+                Redefine the stdout dynamic variable so that the
+                request-handler can just write to stdout, making its
+                debugging easier and generally minimizing string
+                concatenation needs. If you add other initializations that
+                may have the side effect of printing to stdout, remember that
+                this redirection should come last!
+                |#
+                (let* ((*standard-output* stream))
+                  ;; We just ignore the request headers and the request body
+                  ;; for now.
+                  (skip-headers stream)
+                  ;; TODO: If the client has closed the connection,
+                  ;; do not call the request-handler, it is useless.
+                  
+                  ;; Prevent the server from crashing if an unhandled
+                  ;; exception is triggered in the request-handler.
+                  (handle-all
+                    ;; TODO: any possible output on stdout would mess up with the
+                    ;; HTML headers, since stdout has been redirected to the
+                    ;; socket stream.
 
-               ;; Prevent the server from crashing if an unhandled exception is
-               ;; triggered in the request-handler.
-               (handle-all
-                 ;; TODO: any possible output on stdout would mess up with the
-                 ;; HTML headers, since stdout has been redirected to the
-                 ;; socket stream.
+                    ;; Call the specific Hyde request-handler (e.g. Hyde).
+                    (funcall request-handler method path) 
 
-                 ;; Call the specific Hyde request-handler (e.g. Hyde).
-                 (funcall request-handler method path) 
+                    ;; DEBUG:
+                    ;(inspect condition)
+                    ;(invoke-debugger condition)
 
-                 ;; DEBUG:
-                 ;(inspect condition)
-                 ;(invoke-debugger condition)
-
-                 ;; We dump unhandled conditions happening in a
-                 ;; request-handler on stderr, since stdout has been
-                 ;; redirected to the stream!
-                 (format *error-output*
-                         "~&;;; While handling request for /~a" path)
-                 (print-condition condition *error-output*)
-                 #|
-                 TODO: is there a way to check if the socket is still open
-                 before trying to use it? We need either that or ignore-errors
-                 or it could generate another uncaught error and stop the
-                 server.
-                 |#
-                 (ignore-errors (server-error-response method condition)))))
-           (format *error-output* "~&;;; While handling request first line")
-           (print-condition condition *error-output*)) 
-         ;; Make sure the connection socket and associated stream is always
-         ;; closed. See TODO above.
-         (ignore-errors (close stream) (socket-close connected-sock)))))
-     ;; This ensures the port is always freed if an unexpected exception
-     ;; happens. See TODO above.
-     (ignore-errors (socket-close sock)))))
+                    ;; We dump unhandled conditions happening in a
+                    ;; request-handler on stderr, since stdout has been
+                    ;; redirected to the stream!
+                    (format *error-output*
+                            "~&;;; While handling request for /~a" path)
+                    (print-condition condition *error-output*)
+                    ;; TODO: Check if the socket is still open,
+                    ;; before trying to use it. SBCL doc mention a
+                    ;; (socket-open-p) call that may do it, but that is not
+                    ;; available in ECL. See also:
+                    ;; http://stefan.buettcher.org/cs/conn_closed.html
+                    ;; http://stackoverflow.com/questions/11596853/how-do-i-check-whether-the-other-end-has-closed-my-socket-stream-from-a-single
+                    ;; http://www.softlab.ntua.gr/facilities/documentation/unix/unix-socket-faq/unix-socket-faq-2.html#ss2.1
+                    ;; We need ignore-errors or it could generate
+                    ;; another error and stop the server.
+                    (ignore-errors
+                      (server-error-response method condition)))))
+              (format *error-output* "~&;;; While handling request first line")
+              (print-condition condition *error-output*)) 
+            ;; Make sure the connection socket and associated stream is always
+            ;; closed. we need ignore-errors or it could generate another
+            ;; error and stop the server.
+            (ignore-errors (socket-close connected-sock)))))
+        #|
+        This ensures the port is always freed if an unexpected exception
+        happens. We need ignore-errors to avoid dropping into the Lisp
+        debugger, which may puzzle users.
+        http://www.softlab.ntua.gr/facilities/documentation/unix/unix-socket-faq/unix-socket-faq-2.html#ss2.4
+        |#
+        (ignore-errors (socket-close sock))))
+    (format *error-output*
+      "~&;;; While initializing HTTP server or accepting a connection")
+    (print-condition condition *error-output*)))
 
 (defun not-found-response (method path)
   "Simple response for a non-existent resource."

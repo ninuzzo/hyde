@@ -25,8 +25,6 @@ exec ecl -norc -q -shell $0 -- ${1+"$@"}
 ;;; Windows and Linux.
 (push (make-pathname :directory '(:RELATIVE "src" "cl-ppcre-2.0.3"))
       asdf:*central-registry*)
-(push (make-pathname :directory '(:RELATIVE "src" "usocket-0.5.5"))
-      asdf:*central-registry*)
 
 (asdf:oos 'asdf:load-op :hyde)
 

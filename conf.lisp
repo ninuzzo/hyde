@@ -22,6 +22,9 @@ along with Hyde.  If not, see <http://www.gnu.org/licenses/>.
 
 (in-package :hyde)
 
+;; You can also use :any or "0.0.0.0" to bind to any IP address.
+;; Anyway, binding to "localhost" or "127.0.0.1" only is recommended for
+;; security, unless you are on a private trusted LAN.
 (defvar *server-address* "127.0.0.1" "Default web server listening address.")
 
 ;; Port numbers less than 1024 usually require superuser privileges.

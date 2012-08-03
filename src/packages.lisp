@@ -5,7 +5,7 @@ Copyright (c) 2012 Antonio Bonifati <antonio.bonifati@gmail.com>
 
 This file is part of Hyde.
 
-Hyde is free software#: you can redistribute it and/or modify
+Hyde is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 3 of the License, or
 (at your option) any later version.
@@ -16,15 +16,16 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with Hyde.  If not, see <http#://www.gnu.org/licenses/>.
+along with Hyde.  If not, see <http://www.gnu.org/licenses/>.
 
 |#
 
 (defpackage #:hyde
  (:use #:cl)
  (:import-from #:cl-ppcre #:regex-replace-all)
- (:import-from #:usocket #:socket-accept #:socket-close #:socket-listen
-  #:socket-stream)
+ (:import-from #:sb-bsd-sockets #:get-host-by-name #:host-ent-addresses
+   #:inet-socket #:socket-accept #:socket-bind #:socket-close #:socket-listen
+   #:socket-make-stream #:socket-receive #:sockopt-reuse-address)
  (:export
   ;; date
   #:get-gmt-date-string
@@ -34,8 +35,8 @@ along with Hyde.  If not, see <http#://www.gnu.org/licenses/>.
   ;; hash
   #:hash-to-list #:list-to-hash #:read-hash #:write-hash
   ;; static-http
-  #:ok-response #:handle-all #:index-p #:print-condition #:print-response
-  #:not-found-response #:serve #:server-error-response
+  #:ok-response #:handle-all #:index-p #:nslookup #:print-condition
+  #:print-response #:not-found-response #:serve #:server-error-response
   ;; hyde-server
   #:convert-file #:file-needs-rebuild-p #:process-cmdline
   #:process-directory #:process-file #:start-server

@@ -16,13 +16,13 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with Hyde.  If not, see <http#://www.gnu.org/licenses/>.
+along with Hyde.  If not, see <http://www.gnu.org/licenses/>.
 
 |#
 
 (defpackage :hyde-system (:use :asdf :cl))
 (in-package :hyde-system)
-     
+
 (defsystem hyde
   :author "Antonio Bonifati <antonio.bonifati@gmail.com>"
   :version "0.1.1"
@@ -41,4 +41,4 @@ along with Hyde.  If not, see <http#://www.gnu.org/licenses/>.
                (:file "hyde-server")
                (:file "html-src")
                #+eclbuild (:file "prologue"))
-  :depends-on (:cl-ppcre :usocket))
+  :depends-on (:cl-ppcre :sb-bsd-sockets))

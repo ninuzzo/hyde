@@ -1,4 +1,7 @@
 Hyde 0.1.1 (upgrade from 0.1 recommended and safe for all users)
+* Got rid of usocket, I am now using BSD sockets directly.
+  Kept cl-ppcre as the only dependency,
+  because regexp support is generally useful in user code too.
 * Added forgotten u tag.
 * Implemented forgotten url-decode (should I be shot?).
 * Imported all Apache mime.types.
