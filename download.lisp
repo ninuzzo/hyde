@@ -7,18 +7,18 @@
     (header
      (h1 :class "h1" :title "Download latest version"
        "Damn Yeah I wanna get hurt")
-     (h2 :class "h2" "0.1"))
+     (h2 :class "h2" "0.1.1"))
     (section
      (h1 :class "h2" :title "For all users" "For mortal humans")
      (ul
       (li
        (a :title "32-bit executable for Windows"
-        :href "download/hyde-0.1-win.zip"
+        :href "download/hyde-0.1.1-win.zip"
         "Click &amp; pray version for Wingdoze Virus")
        ". All inclusive.")
       (li
        (a :title "32-bit executable for Linux"
-        :href "download/hyde-0.1-linux.tgz"
+        :href "download/hyde-0.1.1-linux.tgz"
         "Type &amp; swear version for Leenux Pingu")
        ". You also need to have "
        (a :href "http://ecls.sourceforge.net/"
@@ -28,11 +28,11 @@
      (h1 :class "h2" :title "For developers" "For brainsick overhumans")
      (ul
       (li
-       (a :title "Portable source code" :href "https://github.com/ninuzzo/hyde/tarball/v0.1"
-        "The full spaghetti-code mess, version 0.1")
-       ". Compiles and runs under ECL Common-Lisp only. You can also "
+       (a :title "Portable source code" :href "https://github.com/ninuzzo/hyde/tarball/v0.1.1"
+        "The full spaghetti-code mess, version 0.1.1")
+       ". Compiles and runs under ECL Common-Lisp version &ge; 12.7.1 only. You can also "
        (a :href "https://github.com/ninuzzo/hyde" :target "_blank"
-        "browse the source-code repository online") ".")))))
+        "browse the source-code repository online, which is always the latest pre-release version") ".")))))
 
  (echo 
   (inc "layout.lisp")))

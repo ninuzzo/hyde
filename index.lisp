@@ -19,6 +19,15 @@
      (h1 :class "h1" :title "Latest news" "Latest crime news")
      (article
       (header
+       (h1 :class "h2" "Onslaught on HTML: Hyde 0.1.1 released!")
+       (p "Posted by "
+        (a :href "http://ninuzzo.github.com/about.html" :target "_blank" "AB")
+        " on " (datetime :datetime "2012-08-03" "Aug 3rd, 2012")))
+      (p "New stabbing release. Since it fixes some bugs, everybody should upgrade. "
+        (a :href "https://github.com/ninuzzo/hyde/TODO-LINK-TO-CHANGELOG"
+          "Details of what happened") "."))
+     (article
+      (header
        (h1 :class "h2" "First murder: Hyde 0.1 is out!")
        (p "Posted by "
         (a :href "http://ninuzzo.github.com/about.html" :target "_blank" "AB")
