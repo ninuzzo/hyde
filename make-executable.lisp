@@ -4,7 +4,15 @@
 
 ;; Require the C compiler first, because in Windows
 ;; ECL is activating the bytecodes compiler by default.
-(require :cmp) ; or (ext:install-c-compiler)
+#+win32 (require :cmp) ; or (ext:install-c-compiler)
+#|
+This is also required for linking to work in Windows.
+The problem is with cl-ppcre files, not Hyde files.
+TODO: try without this in the future, when linking files
+that contain split binary data will be supported.
+|#
+#+win32 (setf C::*COMPILE-IN-CONSTANTS* t)
+
 (require :asdf)
 (push (make-pathname :directory '(:RELATIVE "src"))
       asdf:*central-registry*)
