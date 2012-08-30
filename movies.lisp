@@ -12,8 +12,15 @@
        :type "video/ogg")
       (source :src "http://archive.org/download/DrJekyllandMrHyde/DrJekyllandMrHyde_512kb.mp4" :type "video/mp4"))
      (figcaption
-      (a :href "http://archive.org/details/DrJekyllandMrHyde" :target "_blank"
-       "Dr. Jekyll and Mr. Hyde (1920)")))
+      (p
+       (a :href "http://archive.org/details/DrJekyllandMrHyde" :target "_blank"
+        "Dr. Jekyll and Mr. Hyde (1920)") ". "
+       (a :href "download/DrJekyllandMrHyde.srt" :download ""
+        "Sottotitoli in italiano")
+       ". " (br)
+       (a :href "download/DrJekyllandMrHyde.srt" :download ""
+        "Italian subtitles")
+       ", useful to Italian language learners too.")))
     (figure
      (object :classid "clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
       :width 640 :height 502
