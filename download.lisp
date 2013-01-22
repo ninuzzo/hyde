@@ -20,7 +20,10 @@
        (a :title "32-bit executable for Linux"
         :href "download/hyde-0.1.1-linux.tgz"
         "Type &amp; swear version for Leenux Pingu")
-       ". You also need to have "
+       " ("
+       (a :title "64-bit executable for Linux"
+        :href "download/hyde-0.1.1-linux64.tgz" "64 nip version here")
+       "). You also need to have "
        (a :href "http://ecls.sourceforge.net/"
         (abbr :title "Embeddable Common-Lisp" "ECL")) 
        " installed, preferably from a package of your Linux distro.")))
